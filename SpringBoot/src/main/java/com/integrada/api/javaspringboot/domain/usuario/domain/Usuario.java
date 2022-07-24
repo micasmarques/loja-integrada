@@ -31,4 +31,10 @@ public class Usuario {
     @Setter
     private String senha;
 
+    public Usuario(Integer id, String nome, String login, String senha) {
+        this.id = id;
+        this.nome = nome;
+        this.login = login;
+        this.senha = senha;
+    }
 }

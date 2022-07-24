@@ -7,9 +7,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-
 @Entity
 @Table(name = "Carrinho")
 public class Carrinho {
@@ -24,7 +21,23 @@ public class Carrinho {
     @Getter
     @Setter
     @ManyToMany
-    @JoinTable(name="Produto")
     @ElementCollection
     private List<Produto> produtos;
+
+    @Column(name = "PRECO_TOTAL")
+    @Getter
+    @Setter
+    private Double precoTotal;
+
+    @Column(name = "ID_USER")
+    @Getter
+    @Setter
+    private Integer idUsuario;
+
+    public Carrinho(Integer id, Integer idUsuario, List<Produto> produtos, Double precoTotal) {
+        this.id = id;
+        this.idUsuario = idUsuario;
+        this.produtos = produtos;
+        this.precoTotal = precoTotal;
+    }
 }

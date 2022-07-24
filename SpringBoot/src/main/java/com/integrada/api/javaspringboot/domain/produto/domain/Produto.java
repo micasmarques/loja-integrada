@@ -36,4 +36,11 @@ public class Produto {
     @Setter
     private Boolean isActive;
 
+    public Produto(Integer id, String nome, Double preco, Integer estoque, Boolean isActive) {
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
+        this.estoque = estoque;
+        this.isActive = isActive;
+    }
 }

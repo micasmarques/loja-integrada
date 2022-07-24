@@ -1,10 +1,5 @@
 package com.integrada.api.javaspringboot.domain.carrinho.service;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.transaction.Transactional;
-
 import com.integrada.api.javaspringboot.domain.produto.domain.Produto;
 import com.integrada.api.javaspringboot.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +8,9 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.ufc.br.exception.SemPratosSuficienteException;
-import com.ufc.br.model.Prato;
-import com.ufc.br.repository.PratoRepository;
+import javax.transaction.Transactional;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)

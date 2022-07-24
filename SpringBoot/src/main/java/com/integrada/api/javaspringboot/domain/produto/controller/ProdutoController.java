@@ -4,15 +4,16 @@ import com.integrada.api.javaspringboot.domain.produto.comparator.CompareUsersBy
 import com.integrada.api.javaspringboot.domain.produto.comparator.CompareUsersByNome;
 import com.integrada.api.javaspringboot.domain.produto.domain.Produto;
 import com.integrada.api.javaspringboot.domain.response_delete.ResponseDell;
-import com.integrada.api.javaspringboot.domain.usuario.domain.Usuario;
 import com.integrada.api.javaspringboot.repository.ProdutoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class ProdutoController extends Produto{
+public class ProdutoController{
+    @Autowired
     private final ProdutoRepository acoes;
 
     public ProdutoController(ProdutoRepository acoes) {
