@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/carrinho")
+@RequestMapping("/api")
 public class CarrinhoController {
     private final CarrinhoRepository carrinhoRepository;
     private final ProdutoRepository produtoRepository;
@@ -49,15 +49,30 @@ public class CarrinhoController {
         return carrinhoRepository.save(carrinho);
     }
 
-    @GetMapping("/carrinho/adicionar/{codigo}")
-	public void adicionar(@PathVariable("codigo") Integer codigo) {
-		produtoRepository.findById(codigo).ifPresent(carrinhoService::adicionar);
-	}
+   // adiciona produto no carrinho
+    @PostMapping("/carrinho/adicionar/{id}")
+	public void adicionar(@PathVariable("id") Integer id) {
+		produtoRepository.findById(id).ifPresent(carrinhoService::adicionar);
+    }
 
-	@GetMapping("/carrinho/remover/{codigo}")
-	public void remover(@PathVariable("codigo") Integer codigo) {
-        produtoRepository.findById(codigo).ifPresent(carrinhoService::remover);
-	}
+    // remove produto do carrinho
+	@PostMapping("/carrinho/remover/{id}")
+	public void remover(@PathVariable("id") Integer id) {
+        produtoRepository.findById(id).ifPresent(carrinhoService::remover);
+    }
+
+    // adiciona desconto
+    @PostMapping("/carrinho/desconto/{id}/{cupom}")
+    public Carrinho addDesconto(@PathVariable("id") Integer id, @PathVariable("cupom") Double cupom){
+        carrinhoRepository.getOne(id).setPrecoTotal(carrinhoRepository.findById(id)
+                .get().getPrecoTotal()-cupom);
+        return carrinhoRepository.getOne(id);
+    }
+
+    @GetMapping("/carrinho/preco/{id}")
+    public Double preco(@PathVariable("id") Integer id) {
+        return produtoRepository.findById(id).get().getPreco();
+    }
 
     //deletar carrinho
     @DeleteMapping(value = "/carrinho/{codigo}")
